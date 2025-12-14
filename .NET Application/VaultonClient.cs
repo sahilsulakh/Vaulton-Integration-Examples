@@ -21,8 +21,8 @@ namespace VaultonSDK
         /// Creates a new Vaulton client instance
         /// </summary>
         /// <param name="apiKey">Your Vaulton API key from the dashboard</param>
-        /// <param name="baseUrl">Vaulton API base URL (default: https://api.vaulton.app)</param>
-        public VaultonClient(string apiKey, string baseUrl = "http://localhost:3001")
+        /// <param name="baseUrl">Vaulton API base URL (default: https://vaulton.vercel.app)</param>
+        public VaultonClient(string apiKey, string baseUrl = "https://vaulton.vercel.app")
         {
             _apiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
             _baseUrl = baseUrl.TrimEnd('/');

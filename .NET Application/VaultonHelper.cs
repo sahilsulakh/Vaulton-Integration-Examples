@@ -18,7 +18,7 @@ namespace VaultonIntegration
         /// </summary>
         /// <param name="apiKey">Your API key from the Vaulton dashboard</param>
         /// <param name="baseUrl">Optional custom API URL</param>
-        public static void Initialize(string apiKey, string baseUrl = "http://localhost:3001")
+        public static void Initialize(string apiKey, string baseUrl = "https://vaulton.vercel.app")
         {
             _client = new VaultonClient(apiKey, baseUrl);
         }

@@ -2,8 +2,8 @@
 
 Complete integration package for using Vaulton license authentication in your .NET Windows Forms applications.
 
-> **Note:** Default base URL is `http://localhost:3001` for local development.
-> Change this when deploying to production.
+> **Note:** Default base URL is `https://vaulton.vercel.app` for production.
+> For local development, pass `http://localhost:3000` as the baseUrl parameter.
 
 ## Quick Start
 
@@ -192,5 +192,5 @@ catch (Exception ex)
 ## Support
 
 For issues or questions:
-- Dashboard: https://vaulton.app
-- Documentation: https://docs.vaulton.app
+- Dashboard: https://vaulton.vercel.app/dashboard
+- Website: https://vaulton.vercel.app
