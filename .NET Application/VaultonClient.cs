@@ -227,6 +227,31 @@ namespace VaultonSDK
             catch { }
             return Environment.MachineName;
         }
+        public async Task<string> GetVaultFileContentAsync(string filename)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"{_baseUrl}/api/v1/vault/read/{Uri.EscapeDataString(filename)}");
+                var responseJson = await response.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<VaultFileResponse>(responseJson, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                if (result?.Success == true && result.Data != null)
+                {
+                    return result.Data.Content;
+                }
+                
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error fetching vault file: {ex.Message}");
+                return null;
+            }
+        }
     }
 
     /// <summary>
@@ -269,5 +294,20 @@ namespace VaultonSDK
         public string Message { get; set; }
         public string Error { get; set; }
         public object Data { get; set; }
+    }
+
+    internal class VaultFileResponse
+    {
+        public bool Success { get; set; }
+        public string Message { get; set; }
+        public VaultFileData Data { get; set; }
+    }
+
+    internal class VaultFileData
+    {
+        public string Filename { get; set; }
+        public string Content { get; set; }
+        public long Size { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

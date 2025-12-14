@@ -116,6 +116,30 @@ private async void btnLogin_Click(object sender, EventArgs e)
 }
 ```
 
+### Option D: Using Vault Files (Remote Config/Updates)
+
+You can read files stored in your application's Vault (e.g., `update.txt`, `status.txt`, `config.json`) directly from your app. This is useful for remote configuration, checking for updates, or displaying announcements.
+
+```csharp
+using VaultonSDK;
+
+// Initialize
+var client = new VaultonClient("YOUR_API_KEY_HERE");
+
+// Read a file from your Vault
+string filename = "welcome_message.txt";
+string content = await client.GetVaultFileContentAsync(filename);
+
+if (content != null)
+{
+    Console.WriteLine($"File Content: {content}");
+}
+else
+{
+    Console.WriteLine("File not found.");
+}
+```
+
 ## Hardware ID (HWID) Lock
 
 The SDK automatically captures and sends the user's hardware ID for HWID locking. This prevents license sharing between devices.
@@ -177,6 +201,7 @@ catch (Exception ex)
 |--------|-------------|
 | `ValidateLicenseAsync(string licenseKey)` | Validates a license key |
 | `AuthenticateUserAsync(string username, string password)` | Authenticates with username/password |
+| `GetVaultFileContentAsync(string filename)` | reads content of a file from your Vault |
 | `GetHardwareId()` | Gets the current machine's hardware ID |
 
 ### VaultonHelper
